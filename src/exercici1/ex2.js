@@ -8,11 +8,21 @@ const getWeather = async (city, zipCode, country) => {
 
   if (city && !zipCode && !country) {
     url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&units=metric&days=7`;
+    console.log(1);
     // url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
   } else if (!city && zipCode && country) {
     url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${zipCode},${country}&units=metric&days=7`;
+    console.log(2);
+  } else if (!city && zipCode && !country) {
+    alert('El camp ciutat és requerit!');
+    console.log(3);
+    return false;
+  } else if (city && zipCode && !country) {
+    url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city},&q=${zipCode}&units=metric&days=7`;
+    console.log(4);
   } else {
     url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city},&q=${zipCode},&q=${country}&units=metric&days=7`;
+    console.log(5);
   }
   console.log('city', city, 'zipCode', zipCode, 'country', country, url);
   //   https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}
