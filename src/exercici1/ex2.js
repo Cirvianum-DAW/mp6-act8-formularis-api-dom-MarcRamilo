@@ -7,21 +7,21 @@ const getWeather = async (city, zipCode, country) => {
   let url = '';
 
   if (city && !zipCode && !country) {
-    url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&units=metric&days=7`;
+    url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&units=metric&days=7&lang=es`;
     console.log(1);
     // url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
   } else if (!city && zipCode && country) {
-    url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${zipCode},${country}&units=metric&days=7`;
+    url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${zipCode},${country}&units=metric&days=7&lang=es`;
     console.log(2);
   } else if (!city && zipCode && !country) {
     alert('El camp ciutat és requerit!');
     console.log(3);
     return false;
   } else if (city && zipCode && !country) {
-    url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city},&q=${zipCode}&units=metric&days=7`;
+    url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city},&q=${zipCode}&units=metric&days=7&lang=es`;
     console.log(4);
   } else {
-    url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city},&q=${zipCode},&q=${country}&units=metric&days=7`;
+    url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city},&q=${zipCode},&q=${country}&units=metric&days=7&lang=es`;
     console.log(5);
   }
   console.log('city', city, 'zipCode', zipCode, 'country', country, url);
@@ -86,6 +86,14 @@ document
       document.getElementById('img').src = img;
       document.getElementById('location').innerHTML = location;
       document.getElementById('date').innerHTML = date;
+      //   put hidden clas to display on
+      var hiddenElements = document.querySelectorAll('.hidden');
+
+      // Iterem sobre els elements y eliminem la clase 'hidden'
+      hiddenElements.forEach(function (element) {
+        element.classList.remove('hidden');
+      });
+
       //get tomorrow weather
       let location2 = data.location.name;
       console.log(location2);
@@ -107,6 +115,7 @@ document
       document.getElementById('img2').src = img2;
       document.getElementById('location2').innerHTML = location2;
       document.getElementById('date2').innerHTML = date2;
+
     } catch (error) {
       console.error(error);
     }
